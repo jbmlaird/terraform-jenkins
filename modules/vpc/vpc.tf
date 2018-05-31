@@ -76,6 +76,15 @@ resource "aws_security_group" "public_subnet_sg" {
     to_port     = 22
     protocol    = "tcp"
   }
+
+  egress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port   = 0
+    protocol    = -1
+    to_port     = 0
+  }
 }
 
 resource "aws_route_table" "public_subnet_route_table" {

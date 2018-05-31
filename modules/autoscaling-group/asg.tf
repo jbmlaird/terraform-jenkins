@@ -33,9 +33,11 @@ resource "aws_launch_configuration" "jenkins_launch_configuration" {
   user_data       = <<EOF
     #!/bin/bash
     yum update -y
-    sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkinsci.org/redhat/jenkins.repo
+    sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
     sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
     yum install jenkins -y
+    sudo yum install java-1.8.0
+    sudo yum remove java-1.7.0-openjdk
     service jenkins start
   EOF
 }
